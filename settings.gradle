@@ -1,0 +1,5 @@
+include ':module_core'
+include ':common'
+include ':baseLib'
+include ':app'
+rootProject.name = "BaseProject"

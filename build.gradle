@@ -1,0 +1,36 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    apply from: 'baseLib.gradle'
+    apply from: 'projectLib.gradle'
+    ext {
+        kotlin_version = '1.4.10'
+        versions.kotlin = '1.4.10'
+        versions.kotlin = '1.4.10'
+        versions.kotlin = '1.4.10'
+    }
+
+    addRepos(repositories)
+    addLibRepos(repositories)
+
+    dependencies {
+        classpath deps.android_gradle_plugin
+        classpath deps.kotlin.plugin
+        classpath deps.benchmark_gradle
+        classpath deps.navigation.safe_args_plugin
+        classpath proj.channel.plugin
+    }
+
+    repositories {
+        google()
+    }
+}
+
+allprojects {
+    addRepos(repositories)
+    addLibRepos(repositories)
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

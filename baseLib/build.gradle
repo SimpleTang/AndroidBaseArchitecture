@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
+    defaultConfig {
+        applicationId "com.nacai.baseproject"
+        compileSdkVersion build_versions.compile_sdk
+        buildToolsVersion build_versions.build_tools
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.aar'])
+    api deps.kotlin.stdlib
+    api deps.app_compat
+    api deps.core_ktx
+    api deps.retrofit.runtime
+    api deps.retrofit.gson
+    api deps.okhttp_logging_interceptor
+    api deps.lifecycle.viewmodel_ktx
+    api deps.lifecycle.livedata_ktx
+    api deps.lifecycle.livedata_ext
+    api deps.fragment.runtime_ktx
+    api deps.fragment.runtime
+    api deps.activity.activity_ktx
+    api deps.mars.xlog
+    api deps.utilcode
+    api deps.mmkv
+    api deps.quickAdapter
+    api deps.refreshView
+    api deps.recyclerview
+    api deps.constraint_layout
+    api deps.material
+    api deps.navigation.runtime_ktx
+    api deps.navigation.ui_ktx
+    api deps.navigation.fragment_ktx
+    api deps.dispatcher.core
+    kapt deps.dispatcher.processor
+}
