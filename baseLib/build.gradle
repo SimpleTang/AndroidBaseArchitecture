@@ -10,8 +10,8 @@ android {
     buildToolsVersion build_versions.build_tools
     defaultConfig {
         applicationId "com.nacai.baseproject"
-        compileSdkVersion build_versions.compile_sdk
-        buildToolsVersion build_versions.build_tools
+        targetSdkVersion build_versions.target_sdk
+        minSdkVersion build_versions.min_sdk
         versionCode 1
         versionName "1.0"
 
