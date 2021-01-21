@@ -15,11 +15,13 @@ object ProviderManager : AppLifeCycles {
     }
 
     override fun onCreate(application: Application) {
-
+        providers.forEach {
+            it.value.init(application)
+        }
     }
 
     override fun onTerminate(application: Application) {
-
+        providers.clear()
     }
 
     inline fun <reified T> get(): T? {
