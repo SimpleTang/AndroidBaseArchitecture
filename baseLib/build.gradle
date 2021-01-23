@@ -9,7 +9,6 @@ android {
     compileSdkVersion build_versions.compile_sdk
     buildToolsVersion build_versions.build_tools
     defaultConfig {
-        applicationId "com.nacai.baseproject"
         targetSdkVersion build_versions.target_sdk
         minSdkVersion build_versions.min_sdk
         versionCode 1
@@ -30,6 +29,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    //支持@Parcelize来实现Parcelable序列化
+    androidExtensions {
+        experimental = true
     }
 }
 
@@ -60,5 +64,6 @@ dependencies {
     api deps.navigation.ui_ktx
     api deps.navigation.fragment_ktx
     api deps.dispatcher.core
-    kapt deps.dispatcher.processor
+//    kapt deps.dispatcher.processor
+    api project(":process_annotation")
 }

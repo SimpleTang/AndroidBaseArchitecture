@@ -15,14 +15,14 @@ import com.nacai.base_lib.tools.ManifestParser
 
 class AppDelegate(context: Context) : AppLifeCycles {
     private var mApplication: Application? = null
-    private var mModules: List<ConfigModule>? = null
+    private var mModuleConfigs: List<ModuleConfig>? = null
     private var mAppLifeCycles: MutableList<AppLifeCycles> = arrayListOf()
     private var mActivityLifeCycles: MutableList<Application.ActivityLifecycleCallbacks> = arrayListOf()
     private var mFragmentLifeCycles: MutableList<FragmentManager.FragmentLifecycleCallbacks> = arrayListOf()
 
     init {
-        mModules = ManifestParser.parseConfigModules(context)
-        mModules?.forEach {
+        mModuleConfigs = ManifestParser.parseConfigModules(context)
+        mModuleConfigs?.forEach {
             it.injectAppLifecycle(context, mAppLifeCycles)
             it.injectActivityLifecycle(context, mActivityLifeCycles)
             it.injectFragmentLifecycle(context, mFragmentLifeCycles)

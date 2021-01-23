@@ -9,7 +9,7 @@ import com.nacai.base_lib.integration.AppLifeCycles
  * 框架整体的生命周期注入类
  */
 
-interface ConfigModule {
+interface ModuleConfig {
     /**
      * 使用[AppLifeCycles]在Application的生命周期中注入一些操作
      */

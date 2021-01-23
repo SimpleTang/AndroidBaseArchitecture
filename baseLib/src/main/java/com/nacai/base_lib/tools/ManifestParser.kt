@@ -2,7 +2,7 @@ package com.nacai.base_lib.tools
 
 import android.content.Context
 import android.content.pm.PackageManager
-import com.nacai.base_lib.integration.ConfigModule
+import com.nacai.base_lib.integration.ModuleConfig
 import com.nacai.base_lib.provider.ModuleProvider
 import java.util.*
 import kotlin.collections.HashMap
@@ -12,11 +12,11 @@ import kotlin.collections.HashMap
  * 关于在Manifest中获取ConfigModule配置处理类
  */
 object ManifestParser {
-    private const val MODULE_VALUE = "ConfigModule"
+    private const val MODULE_VALUE = "ModuleConfig"
     private const val PROVIDER_VALUE = "ModuleProvider"
 
-    fun parseConfigModules(context: Context): List<ConfigModule> {
-        val modules = ArrayList<ConfigModule>()
+    fun parseConfigModules(context: Context): List<ModuleConfig> {
+        val modules = ArrayList<ModuleConfig>()
         try {
             val appInfo = context.packageManager.getApplicationInfo(
                 context.packageName, PackageManager.GET_META_DATA
@@ -37,7 +37,7 @@ object ManifestParser {
         return modules
     }
 
-    private fun parseModuleByName(className: String): ConfigModule? {
+    private fun parseModuleByName(className: String): ModuleConfig? {
         val clazz: Class<*>
         try {
             clazz = Class.forName(className)
@@ -45,7 +45,7 @@ object ManifestParser {
 //            throw IllegalArgumentException("Unable to find ConfigModule implementation", e)
             return null
         }
-        if(!clazz.isAssignableFrom(ConfigModule::class.java)){
+        if(!ModuleConfig::class.java.isAssignableFrom(clazz)){
             return null
         }
         val module: Any
@@ -59,7 +59,7 @@ object ManifestParser {
             return null
         }
 
-        if (module !is ConfigModule) {
+        if (module !is ModuleConfig) {
 //            throw RuntimeException("Expected instanceof ConfigModule, but found: $module")
             return null
         }

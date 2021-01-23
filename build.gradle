@@ -4,10 +4,9 @@ buildscript {
     apply from: 'baseLib.gradle'
     apply from: 'projectLib.gradle'
     ext {
-        kotlin_version = '1.4.10'
-        versions.kotlin = '1.4.10'
-        versions.kotlin = '1.4.10'
-        versions.kotlin = '1.4.10'
+        kotlin_version = '1.4.21'
+        versions.kotlin = '1.4.21'
+        versions.kotlin = '1.4.21'
     }
 
     addRepos(repositories)
