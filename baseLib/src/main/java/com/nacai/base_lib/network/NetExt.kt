@@ -3,6 +3,8 @@ package com.nacai.base_lib.network
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.nacai.base_lib.base.*
+import com.nacai.base_lib.widget.multistate.PageStatus
+import com.nacai.base_lib.widget.refresh.RefreshStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -13,61 +15,52 @@ import kotlin.coroutines.CoroutineContext
 
 @Suppress("CAST_NEVER_SUCCEEDS")
 fun BaseViewModel.requestNetApi(
-    bindStatus: Boolean = false,
-    isRefresh: Boolean = true,
     showToast: Boolean = true,
+    isRefresh: Boolean = true,
+    refreshStatus: MutableLiveData<VMEvent<RefreshStatus>>? = refreshStatusEvent,
+    pageStatus: MutableLiveData<VMEvent<PageStatus>>? = pageStatusEvent,
     error: Throwable.() -> Unit = {},
     finally: () -> Unit = {},
     call: suspend () -> Unit
 ): Job {
     return viewModelScope.launch {
-        if (bindStatus) {
-            //注册前先判断是否显示加载loading
-            if (pageStatusEvent.value?.peekContent() != PageStatus.CONTENT) {
-                pageStatusEvent.value = event(PageStatus.LOADING)
-            }
-        }
+        //注册前先判断是否显示加载loading
+        pageStatus?.value = event(PageStatus.LOADING)
         try {
             call()
-            if (bindStatus) {
-                //成功
-                if (pageStatusEvent.value?.peekContent() != PageStatus.CONTENT)
-                    pageStatusEvent.value = event(PageStatus.CONTENT)
-                //给列表设置是刷新还是加载更多
-                if (isRefresh) {
-                    refreshStatusEvent.value = event(RefreshStatus.REFRESH_SUCCESS)
-                } else {
-                    refreshStatusEvent.value = event(RefreshStatus.LOAD_MORE_SUCCESS)
-                }
+            //成功
+            pageStatus?.value = event(PageStatus.CONTENT)
+            //给列表设置是刷新还是加载更多
+            if (isRefresh) {
+                refreshStatus?.value = event(RefreshStatus.REFRESH_SUCCESS)
+            } else {
+                refreshStatus?.value = event(RefreshStatus.LOAD_MORE_SUCCESS)
             }
         } catch (e: Throwable) {
-            if (bindStatus) {
-                //页面状态
-                if (pageStatusEvent.value?.peekContent() != PageStatus.CONTENT) {
-                    if (e is EmptyException) {
-                        pageStatusEvent.value = event(PageStatus.EMPTY)
-                    } else if (e is UnknownHostException || e is ConnectException) {
-                        pageStatusEvent.value = event(PageStatus.NO_NETWORK)
-                    } else {
-                        e.printStackTrace()
-                        pageStatusEvent.value = event(PageStatus.ERROR)
-                    }
-                }
-                //refresh状态
-                if (isRefresh) {
-                    if (e is EmptyException) {
-                        refreshStatusEvent.value = event(RefreshStatus.EMPTY)
-                    } else {
-                        refreshStatusEvent.value = event(RefreshStatus.REFRESH_FAIL)
-                    }
+            //页面状态
+            if (e is UnknownHostException || e is ConnectException) {
+                pageStatus?.value = event(PageStatus.NO_NETWORK)
+            } else {
+                e.printStackTrace()
+                pageStatus?.value = event(PageStatus.ERROR)
+            }
+
+            //refresh状态
+            if (isRefresh) {
+                if (e is EmptyException) {
+//                    refreshStatus?.value = event(RefreshStatus.EMPTY)
+                    pageStatus?.value = event(PageStatus.EMPTY)
                 } else {
-                    if (e is EmptyException) {
-                        refreshStatusEvent.value = event(RefreshStatus.NOT_MORE)
-                    } else {
-                        refreshStatusEvent.value = event(RefreshStatus.LOAD_MORE_FAIL)
-                    }
+                    refreshStatus?.value = event(RefreshStatus.REFRESH_FAIL)
+                }
+            } else {
+                if (e is EmptyException) {
+                    refreshStatus?.value = event(RefreshStatus.NOT_MORE)
+                } else {
+                    refreshStatus?.value = event(RefreshStatus.LOAD_MORE_FAIL)
                 }
             }
+
             if (NetManager.netConfig.requestHandler?.onErrorCall(e, showToast) != true) {
                 error(e)
             }
@@ -83,7 +76,8 @@ fun Any.doLeakedRequest(
     showToast: Boolean = true,
     error: Throwable.() -> Unit = {},
     finally: () -> Unit = {},
-    call: suspend () -> Unit): Job {
+    call: suspend () -> Unit
+): Job {
     return CoroutineScope(context).launch {
         try {
             call()

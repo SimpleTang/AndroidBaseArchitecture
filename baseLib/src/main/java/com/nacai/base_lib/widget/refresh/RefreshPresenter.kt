@@ -1,4 +1,4 @@
-package com.nacai.base_lib.refresh
+package com.nacai.base_lib.widget.refresh
 
 /***
  * 下拉刷新/上拉加载的接口类

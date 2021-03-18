@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MultiStateLayout">
+        <attr name="state_loadingView" format="reference" />
+        <attr name="state_loadErrorView" format="reference" />
+        <attr name="state_emptyView" format="reference" />
+        <attr name="state_networkErrorView" format="reference" />
+        <attr name="state_contentViewId" format="reference" />
+    </declare-styleable>
+</resources>

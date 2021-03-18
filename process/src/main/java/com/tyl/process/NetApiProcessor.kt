@@ -2,6 +2,7 @@ package com.tyl.process
 
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.tyl.process_annotation.NetApi
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
@@ -114,8 +115,16 @@ class NetApiProcessor : AbstractProcessor() {
         val baseViewModelClassName = ClassName("com.nacai.base_lib.base", "BaseViewModel")
         val requestNetApiFunName = ClassName("com.nacai.base_lib.network", "requestNetApi")
         val throwableClassName = ClassName("kotlin", "Throwable")
-        val bindStatusParams = ParameterSpec.builder("bindStatus", Boolean::class.java)
-            .defaultValue("true")
+        val liveDataClassName = ClassName("androidx.lifecycle","MutableLiveData")
+        val eventClassName=ClassName("com.nacai.base_lib.base","VMEvent")
+        val pageStateEnum=ClassName("com.nacai.base_lib.widget.multistate","PageStatus")
+        val refreshStateEnum=ClassName("com.nacai.base_lib.widget.refresh","RefreshStatus")
+
+        val pageStateParams = ParameterSpec.builder("pageStatus", liveDataClassName.parameterizedBy(eventClassName.parameterizedBy(pageStateEnum)).copy(true))
+            .defaultValue("pageStatusEvent")
+            .build()
+        val refreshStateParams = ParameterSpec.builder("refreshStatus", liveDataClassName.parameterizedBy(eventClassName.parameterizedBy(refreshStateEnum)).copy(true))
+            .defaultValue("refreshStatusEvent")
             .build()
         val isRefreshParams = ParameterSpec.builder("isRefresh", Boolean::class.java)
             .defaultValue("true")
@@ -144,14 +153,15 @@ class NetApiProcessor : AbstractProcessor() {
         val vmApiFun = FunSpec.builder("api")
             .receiver(baseViewModelClassName)
             .returns(jobClassName)
-            .addParameter(bindStatusParams)
-            .addParameter(isRefreshParams)
             .addParameter(showToastParams)
+            .addParameter(isRefreshParams)
+            .addParameter(refreshStateParams)
+            .addParameter(pageStateParams)
             .addParameter(errorParams)
             .addParameter(finallyParams)
             .addParameter(callParams)
             .addStatement(
-                "return %T(bindStatus, isRefresh, showToast, onError, onFinally, { call($fieldName) })",
+                "return %T(showToast, isRefresh, refreshStatus, pageStatus, onError, onFinally, { call($fieldName) })",
                 requestNetApiFunName
             )
             .build()
