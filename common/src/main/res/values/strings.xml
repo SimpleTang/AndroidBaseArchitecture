@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_net_server_error">服务端响应异常</string>
+    <string name="common_net_time_out">网络连接超时</string>
+    <string name="common_net_disconnect">服务器开小差了</string>
+    <string name="common_net_data_error">数据解析错误</string>
+</resources>

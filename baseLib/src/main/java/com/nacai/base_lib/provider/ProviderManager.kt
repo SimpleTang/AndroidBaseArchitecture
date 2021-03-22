@@ -25,6 +25,7 @@ object ProviderManager : AppLifeCycles {
     }
 
     inline fun <reified T> get(): T? {
+
         return providers[T::class.java] as? T
     }
 }

@@ -37,24 +37,20 @@ class MultiStateLayout @JvmOverloads constructor(
     }
 
     class Builder {
-        fun setDefaultEmptyViewLayoutId(@LayoutRes id: Int): Builder {
+        fun setDefaultEmptyViewLayoutId(@LayoutRes id: Int) = apply {
             defaultEmptyViewLayoutId = id
-            return this
         }
 
-        fun setDefaultLoadErrorViewLayoutId(@LayoutRes id: Int): Builder {
+        fun setDefaultLoadErrorViewLayoutId(@LayoutRes id: Int) = apply {
             defaultLoadErrorViewLayoutId = id
-            return this
         }
 
-        fun setDefaultNetworkErrorViewLayoutId(@LayoutRes id: Int): Builder {
+        fun setDefaultNetworkErrorViewLayoutId(@LayoutRes id: Int) = apply {
             defaultNetworkErrorViewLayoutId = id
-            return this
         }
 
-        fun setDefaultLoadingViewLayoutId(@LayoutRes id: Int): Builder {
+        fun setDefaultLoadingViewLayoutId(@LayoutRes id: Int) = apply {
             defaultLoadingViewLayoutId = id
-            return this
         }
 
         fun build() {}

@@ -39,85 +39,75 @@ class NetConfig private constructor(private val builder: Builder) {
          * 连接超时时长
          * @param second 秒
          */
-        fun setConnectTimeout(second: Long): Builder {
+        fun setConnectTimeout(second: Long) = apply {
             connectTimeoutSecs = second
-            return this
         }
 
         /**
          * 读超时时长
          * @param second 秒
          */
-        fun setReadTimeout(second: Long): Builder {
+        fun setReadTimeout(second: Long) = apply {
             readTimeoutSecs = second
-            return this
         }
 
         /**
          * 写超时时长
          * @param second 秒
          */
-        fun setWriteTimeout(second: Long): Builder {
+        fun setWriteTimeout(second: Long) = apply {
             writeTimeoutSecs = second
-            return this
         }
 
         /**
          * 设置 log 日志
          */
-        fun setLogEnable(enable: Boolean, tag: String = "Net"): Builder {
+        fun setLogEnable(enable: Boolean, tag: String = "Net") = apply {
             logEnable = enable
             logTag = tag
-            return this
         }
 
         /**
          * 设置网络拦截器
          */
-        fun setRequestHandler(handler: RequestHandler): Builder {
+        fun setRequestHandler(handler: RequestHandler) = apply {
             requestHandler = handler
-            return this
         }
 
         /**
          * 设置 cookie 持久
          */
-        fun setCookieJar(cookieJar: CookieJar): Builder {
+        fun setCookieJar(cookieJar: CookieJar) = apply {
             this.cookieJar = cookieJar
-            return this
         }
 
         /**
          * 添加拦截器
          * 可以设置一些第三方的拦截器等
          */
-        fun addInterceptor(interceptor: Interceptor): Builder {
+        fun addInterceptor(interceptor: Interceptor) = apply {
             interceptors.add(interceptor)
-            return this
         }
 
-        fun addRetrofitConverterFactory(factory: Converter.Factory): Builder {
+        fun addRetrofitConverterFactory(factory: Converter.Factory) = apply {
             retrofitConverterFactory.add(factory)
-            return this
         }
 
-        fun addRetrofitCallAdapterFactory(factory: CallAdapter.Factory): Builder {
+        fun addRetrofitCallAdapterFactory(factory: CallAdapter.Factory) = apply {
             retrofitCallAdapterFactory.add(factory)
-            return this
         }
 
         /**
          * 设置 HttpClientBuilder 的拦截器，用于自定义的一些配置等
          * 比如 https 的设置
          */
-        fun setHttpClientBuilderInterceptor(interceptor: (OkHttpClient.Builder) -> OkHttpClient.Builder): Builder {
-            clientBuilderInterceptor = interceptor
-            return this
-        }
+        fun setHttpClientBuilderInterceptor(interceptor: (OkHttpClient.Builder) -> OkHttpClient.Builder) =
+            apply {
+                clientBuilderInterceptor = interceptor
+            }
 
-        fun setBaseUrl(url: String): Builder {
+        fun setBaseUrl(url: String) = apply {
             baseUrl = url
-            return this
         }
 
         fun build() = NetConfig(this)

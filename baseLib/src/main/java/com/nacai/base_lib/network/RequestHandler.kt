@@ -3,7 +3,7 @@ package com.nacai.base_lib.network
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import java.io.IOException
+import kotlin.jvm.Throws
 
 /***
  *
@@ -27,5 +27,5 @@ interface RequestHandler {
      * 这里可以做一些项目中通用的错误处理，比如显示 Toast，挤下线等
      * @return 是否拦截回调，返回 true 则此次请求的 onError 不会被回调
      */
-    fun onErrorCall(e:Throwable,showToast:Boolean):Boolean
+    fun onErrorCall(e: Throwable, showToast: Boolean): Boolean
 }

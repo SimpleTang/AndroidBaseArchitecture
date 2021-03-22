@@ -3,6 +3,7 @@ package com.nacai.base_lib.network
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
+import kotlin.jvm.Throws
 
 /***
  * 网络拦截器
