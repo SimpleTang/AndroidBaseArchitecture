@@ -17,47 +17,47 @@ import kotlin.coroutines.CoroutineContext
 fun BaseViewModel.requestNetApi(
     showToast: Boolean = true,
     isRefresh: Boolean = true,
-    refreshStatus: MutableLiveData<VMEvent<RefreshStatus>>? = refreshStatusEvent,
-    pageStatus: MutableLiveData<VMEvent<PageStatus>>? = pageStatusEvent,
+    refreshStatus: MutableLiveData<RefreshStatus>? = this.defaultRefreshStatus,
+    pageStatus: MutableLiveData<PageStatus>? = this.defaultPageStatus,
     error: Throwable.() -> Unit = {},
     finally: () -> Unit = {},
     call: suspend () -> Unit
 ): Job {
     return viewModelScope.launch {
         //注册前先判断是否显示加载loading
-        pageStatus?.value = event(PageStatus.LOADING)
+        pageStatus?.value = PageStatus.LOADING
         try {
             call()
             //成功
-            pageStatus?.value = event(PageStatus.CONTENT)
+            pageStatus?.value = PageStatus.CONTENT
             //给列表设置是刷新还是加载更多
             if (isRefresh) {
-                refreshStatus?.value = event(RefreshStatus.REFRESH_SUCCESS)
+                refreshStatus?.value = RefreshStatus.REFRESH_SUCCESS
             } else {
-                refreshStatus?.value = event(RefreshStatus.LOAD_MORE_SUCCESS)
+                refreshStatus?.value = RefreshStatus.LOAD_MORE_SUCCESS
             }
         } catch (e: Throwable) {
             //页面状态
             if (e is UnknownHostException || e is ConnectException) {
-                pageStatus?.value = event(PageStatus.NO_NETWORK)
+                pageStatus?.value = PageStatus.NO_NETWORK
             } else {
                 e.printStackTrace()
-                pageStatus?.value = event(PageStatus.ERROR)
+                pageStatus?.value = PageStatus.ERROR
             }
 
             //refresh状态
             if (isRefresh) {
                 if (e is EmptyException) {
 //                    refreshStatus?.value = event(RefreshStatus.EMPTY)
-                    pageStatus?.value = event(PageStatus.EMPTY)
+                    pageStatus?.value = PageStatus.EMPTY
                 } else {
-                    refreshStatus?.value = event(RefreshStatus.REFRESH_FAIL)
+                    refreshStatus?.value = RefreshStatus.REFRESH_FAIL
                 }
             } else {
                 if (e is EmptyException) {
-                    refreshStatus?.value = event(RefreshStatus.NOT_MORE)
+                    refreshStatus?.value = RefreshStatus.NOT_MORE
                 } else {
-                    refreshStatus?.value = event(RefreshStatus.LOAD_MORE_FAIL)
+                    refreshStatus?.value = RefreshStatus.LOAD_MORE_FAIL
                 }
             }
 

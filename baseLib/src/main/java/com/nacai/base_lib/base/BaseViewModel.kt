@@ -9,8 +9,8 @@ open class BaseViewModel : ViewModel() {
     val events = HashMap<String, MutableLiveData<VMEvent<*>>>()
     val closePageEvent: MutableLiveData<VMEvent<*>> = MutableLiveData()
     val loadingEvent: MutableLiveData<VMEvent<*>> = MutableLiveData()
-    val pageStatusEvent: MutableLiveData<VMEvent<PageStatus>> = MutableLiveData()
-    val refreshStatusEvent: MutableLiveData<VMEvent<RefreshStatus>> = MutableLiveData()
+    val defaultPageStatus: MutableLiveData<PageStatus> = MutableLiveData()
+    val defaultRefreshStatus: MutableLiveData<RefreshStatus> = MutableLiveData()
 
     init {
     }

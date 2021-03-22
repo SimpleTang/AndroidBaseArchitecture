@@ -21,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivStatusViewLoadErrorImg"
         android:layout_marginTop="10dp"
+        android:text="加载失败"
         />
     <TextView
         android:id="@+id/tvStatusViewRetryRefresh"
@@ -30,5 +31,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvStatusViewLoadErrorHint"
         android:layout_marginTop="10dp"
+        android:text="重试"
+        android:background="#acd"
+        android:padding="20dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

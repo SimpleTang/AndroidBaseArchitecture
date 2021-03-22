@@ -126,6 +126,7 @@ class MultiStateLayout @JvmOverloads constructor(
         }
         contentView?.let {
             stateViews[PageStatus.CONTENT] = it
+            it.visibility = View.GONE
         }
     }
 
@@ -151,7 +152,7 @@ class MultiStateLayout @JvmOverloads constructor(
     private fun generateStateView(layoutId: Int, state: PageStatus): View? {
         var stateView = stateViews[state]
         if (stateView == null && layoutId != 0) {
-            stateView = mInflater.inflate(layoutId, this)
+            stateView = mInflater.inflate(layoutId, null)
             var viewIndex = childCount
             for (i in viewIndex downTo 1) {
                 val childState = findStateByView(getChildAt(i - 1)) ?: continue
@@ -177,8 +178,7 @@ class MultiStateLayout @JvmOverloads constructor(
             if (viewState == state) {
                 view.visibility = View.VISIBLE
                 isShow = true
-            }
-            if (viewState.level <= state.level) {
+            } else if (viewState.level <= state.level) {
                 view.visibility = View.GONE
             }
         }

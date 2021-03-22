@@ -17,10 +17,10 @@ import com.nacai.common_base.R
 )
 fun bindStatus(
     layout: MultiStateLayout,
-    status: PageStatus?,
-    refreshPresenter: RefreshPresenter?,
-    errorImg: Drawable?,
-    errorHint: String?
+    status: PageStatus? = null,
+    refreshPresenter: RefreshPresenter? = null,
+    errorImg: Drawable? = null,
+    errorHint: String? = null
 ) {
     layout.viewInitCallBack = object : MultiStateLayout.OnViewInitCallBack {
         override fun onAttach(view: View, state: PageStatus) {
