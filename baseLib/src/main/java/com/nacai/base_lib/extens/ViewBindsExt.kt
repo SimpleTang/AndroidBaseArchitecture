@@ -13,14 +13,14 @@ fun bindVisibilityByShowOrInvisible(view: View,show: Boolean?){
     view.visibility = if (show == true) View.VISIBLE else View.INVISIBLE
 }
 
-@BindingAdapter("app:onClick")
+@BindingAdapter("onClick")
 fun onClick(view: View,call:((View)->Unit)?=null){
     call?.let {
         view.onClick(call = it)
     }
 }
 
-@BindingAdapter("app:onClickNoAnim")
+@BindingAdapter("onClickNoAnim")
 fun onClickNoAnim(view: View,call:((View)->Unit)?=null){
     call?.let {
         view.onClickNoAnim(call = it)

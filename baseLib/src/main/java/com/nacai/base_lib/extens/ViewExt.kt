@@ -1,8 +1,10 @@
 package com.nacai.base_lib.extens
 
 import android.view.View
+import androidx.core.view.updateLayoutParams
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
+import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.ClickUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 
@@ -24,6 +26,13 @@ fun View.setTouchAnim(){
     ClickUtils.applyPressedViewAlpha(this)
 }
 
+fun View.useStatusBarHeight() = updateLayoutParams {
+    height = BarUtils.getStatusBarHeight()
+}
+
+fun View.useNavigationBarHeight() = updateLayoutParams {
+    height = BarUtils.getNavBarHeight()
+}
 
 fun <T> BaseQuickAdapter<T, *>.bindList(list: ObservableArrayList<T>){
     list.addOnListChangedCallback(object : ObservableList.OnListChangedCallback<ObservableArrayList<T>>() {
