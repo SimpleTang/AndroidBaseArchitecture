@@ -94,7 +94,7 @@ abstract class BaseDialogFragment<B : ViewDataBinding> : DialogFragment(), IView
     }
 
     override fun attachBaseVMEvent(viewModel: BaseViewModel) {
-        viewModel.loadingEvent?.observe(this, EventObserver {
+        viewModel.loadingEvent.observe(this, EventObserver {
             val showLoadingByIView: (view: IView, value: Any?) -> Unit = { view, value ->
                 when (value) {
                     is String -> {
