@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity() {
         mBinding.lifecycleOwner = this
         mBinding.aty = this
         findViewById<Button>(R.id.btn).onClick {
-//            ProviderManager.get<MainProvider>()?.show("MainActivity Call")
-            if (state.value?.peekContent() == PageStatus.ERROR) {
-                state.value = event(PageStatus.CONTENT)
-            } else {
-                state.value = event(PageStatus.ERROR)
-            }
+            ProviderManager.get<MainProvider>().show("MainActivity Call")
+//            if (state.value?.peekContent() == PageStatus.ERROR) {
+//                state.value = event(PageStatus.CONTENT)
+//            } else {
+//                state.value = event(PageStatus.ERROR)
+//            }
         }
     }
 }

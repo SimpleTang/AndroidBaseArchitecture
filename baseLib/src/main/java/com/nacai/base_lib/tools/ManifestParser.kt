@@ -45,7 +45,7 @@ object ManifestParser {
 //            throw IllegalArgumentException("Unable to find ConfigModule implementation", e)
             return null
         }
-        if(!ModuleConfig::class.java.isAssignableFrom(clazz)){
+        if (!ModuleConfig::class.java.isAssignableFrom(clazz)) {
             return null
         }
         val module: Any
@@ -66,8 +66,8 @@ object ManifestParser {
         return module
     }
 
-    fun parseProviders(context: Context): Map<Class<*>, ModuleProvider> {
-        val map = HashMap<Class<*>, ModuleProvider>()
+    fun parseProviders(context: Context): Map<Class<*>, Class<*>> {
+        val map = HashMap<Class<*>, Class<*>>()
         try {
             val appInfo = context.packageManager.getApplicationInfo(
                 context.packageName, PackageManager.GET_META_DATA
@@ -82,17 +82,15 @@ object ManifestParser {
                 }
             }
         } catch (e: PackageManager.NameNotFoundException) {
-//            throw RuntimeException("Unable to find metadata to parse ConfigModule", e)
         }
         return map
     }
 
-    private fun parseProviderByName(className: String): Pair<Class<*>, ModuleProvider>? {
+    private fun parseProviderByName(className: String): Pair<Class<*>, Class<*>>? {
         val clazz: Class<*>
         try {
             clazz = Class.forName(className)
         } catch (e: ClassNotFoundException) {
-//            throw IllegalArgumentException("Unable to find Provider implementation", e)
             return null
         }
         var parentProviderClass: Class<*>? = null
@@ -102,25 +100,21 @@ object ManifestParser {
             }
         }
         if (parentProviderClass == null) {
-//            throw IllegalArgumentException("Unable to find Provider implementation")
             return null
         }
-
-        val provider: Any
+        // 延迟实例化，用到的时候再加载
+        /*val provider: Any
         try {
             provider = clazz.newInstance()
         } catch (e: InstantiationException) {
-//            throw RuntimeException("Unable to instantiate Provider implementation for $clazz", e)
             return null
         } catch (e: IllegalAccessException) {
-//            throw RuntimeException("Unable to instantiate Provider implementation for $clazz", e)
             return null
         }
 
         if (provider !is ModuleProvider) {
-//            throw RuntimeException("Expected instanceof Provider, but found: $provider")
             return null
-        }
-        return Pair(parentProviderClass!!, provider)
+        }*/
+        return Pair(parentProviderClass!!, clazz)
     }
 }

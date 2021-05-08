@@ -7,6 +7,9 @@ import com.nacai.base_lib.integration.AppLifeCycles
 
 /***
  * 框架整体的生命周期注入类
+ * 注意: ModuleConfig 会在 Application 中被调用，为了避免 APP 启动过慢，如非必要module 中的一些第三方库不建议在此初始化，
+ * 可以在 ModuleProvider.init(ApplicationContext) 中处理
+ * ModuleConfig 并不是必须的，在某些 module 中你可以不实现。
  */
 
 interface ModuleConfig {

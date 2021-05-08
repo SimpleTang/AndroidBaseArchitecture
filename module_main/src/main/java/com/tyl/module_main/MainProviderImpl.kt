@@ -9,7 +9,7 @@ import com.nacai.common.provider.MainProvider
 class MainProviderImpl:MainProvider {
     override fun show(msg: String) {
         Log.e("ModuleProvider", "show: MainProviderImpl , $msg" )
-        ProviderManager.get<CoreProvider>()?.show(msg)
+//        ProviderManager.get<CoreProvider>().show(msg)
     }
 
     override fun init(context: Context) {
