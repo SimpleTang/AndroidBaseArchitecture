@@ -84,7 +84,7 @@ class NetApiProcessor : AbstractProcessor() {
         //------------ 2.生成需要的类 ---------------------------
         val apiClass = element as TypeElement
         val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
-        val netManagerClassName = ClassName("com.nacai.base_lib.network", "NetManager")
+        val netManagerClassName = ClassName("com.tyl.base_lib.network", "NetManager")
         val apiClassName = ClassName(packageName, apiClass.simpleName.toString())
 
         // 生成包常量
@@ -112,12 +112,12 @@ class NetApiProcessor : AbstractProcessor() {
         // 生成方法
         // BaseViewModel.api
         val jobClassName = ClassName("kotlinx.coroutines", "Job")
-        val baseViewModelClassName = ClassName("com.nacai.base_lib.base", "BaseViewModel")
-        val requestNetApiFunName = ClassName("com.nacai.base_lib.network", "requestNetApi")
+        val baseViewModelClassName = ClassName("com.tyl.base_lib.base", "BaseViewModel")
+        val requestNetApiFunName = ClassName("com.tyl.base_lib.network", "requestNetApi")
         val throwableClassName = ClassName("kotlin", "Throwable")
         val liveDataClassName = ClassName("androidx.lifecycle","MutableLiveData")
-        val pageStateEnum=ClassName("com.nacai.base_lib.widget.multistate","PageStatus")
-        val refreshStateEnum=ClassName("com.nacai.base_lib.widget.refresh","RefreshStatus")
+        val pageStateEnum=ClassName("com.tyl.base_lib.widget.multistate","PageStatus")
+        val refreshStateEnum=ClassName("com.tyl.base_lib.widget.refresh","RefreshStatus")
 
         val pageStateParams = ParameterSpec.builder("pageStatus", liveDataClassName.parameterizedBy(pageStateEnum).copy(true))
             .defaultValue("defaultPageStatus")
@@ -167,7 +167,7 @@ class NetApiProcessor : AbstractProcessor() {
 
         // 生成方法
         // Any.leakedApi
-        val doLeakedRequestFunName = ClassName("com.nacai.base_lib.network", "doLeakedRequest")
+        val doLeakedRequestFunName = ClassName("com.tyl.base_lib.network", "doLeakedRequest")
         val coroutineContextClassName = ClassName("kotlin.coroutines", "CoroutineContext")
         val dispatchersClassName = ClassName("kotlinx.coroutines", "Dispatchers")
         val anyClassName = ClassName("kotlin", "Any")

@@ -4,8 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.fragment.app.FragmentManager
-import com.nacai.base_lib.integration.AppLifeCycles
-import com.nacai.base_lib.integration.ModuleConfig
+import com.tyl.base_lib.integration.AppLifeCycles
+import com.tyl.base_lib.integration.ModuleConfig
 
 class AppConfig:ModuleConfig {
     override fun injectAppLifecycle(context: Context, lifeCycles: MutableList<AppLifeCycles>) {

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="aty"
-            type="com.nacai.baseproject.MainActivity" />
+            type="com.tyl.baseproject.MainActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <com.nacai.base_lib.widget.multistate.MultiStateLayout
+        <com.tyl.base_lib.widget.multistate.MultiStateLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:state_contentViewId="@id/tv"
@@ -30,7 +30,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </com.nacai.base_lib.widget.multistate.MultiStateLayout>
+        </com.tyl.base_lib.widget.multistate.MultiStateLayout>
         <Button
             android:id="@+id/btn"
             android:layout_width="wrap_content"

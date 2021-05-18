@@ -2,8 +2,7 @@ package com.tyl.module_core
 
 import android.content.Context
 import android.util.Log
-import com.nacai.base_lib.provider.ProviderManager
-import com.nacai.common.provider.CoreProvider
+import com.tyl.common.provider.CoreProvider
 
 class CoreProviderImpl:CoreProvider {
     override fun show(msg: String) {
