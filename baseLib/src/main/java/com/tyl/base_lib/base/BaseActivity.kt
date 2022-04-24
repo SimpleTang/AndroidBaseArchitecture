@@ -55,7 +55,6 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity(), NoProgua
         ActivityStack.removeActivity(this)
     }
 
-    @Suppress("DEPRECATION")
     override fun getResources(): Resources? {
         // 屏蔽系统设置字体大小的影响
         var resources = super.getResources()

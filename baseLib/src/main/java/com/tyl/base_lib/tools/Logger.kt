@@ -9,10 +9,7 @@ object L {
 
     private var enable: Boolean = !BuildConfig.DEBUG
 
-<<<<<<< HEAD
-=======
     @JvmStatic
->>>>>>> v0.0.1
     fun enable(enable: Boolean) = apply {
         this.enable = enable
     }
@@ -42,36 +39,11 @@ object L {
         }
     }
 
-<<<<<<< HEAD
-=======
     @JvmStatic
->>>>>>> v0.0.1
     fun setLogImpl(iLog: ILog) = apply {
         this.defaultLogImpl = iLog
     }
 
-<<<<<<< HEAD
-    fun v(tag: String = TAG_DEFAULT, msg: String) {
-        defaultLogImpl.log(LogLevel.VERBOSE, tag, msg)
-    }
-
-    fun d(tag: String = TAG_DEFAULT, msg: String) {
-        defaultLogImpl.log(LogLevel.DEBUG, tag, msg)
-    }
-
-    fun i(tag: String = TAG_DEFAULT, msg: String) {
-        defaultLogImpl.log(LogLevel.INFO, tag, msg)
-    }
-
-    fun w(tag: String = TAG_DEFAULT, msg: String) {
-        defaultLogImpl.log(LogLevel.WARN, tag, msg)
-    }
-
-    fun e(tag: String = TAG_DEFAULT, msg: String) {
-        defaultLogImpl.log(LogLevel.ERROR, tag, msg)
-    }
-
-=======
     @JvmStatic
     fun v(msg: String, tag: String = TAG_DEFAULT) {
         defaultLogImpl.log(LogLevel.VERBOSE, tag, msg)
@@ -98,7 +70,6 @@ object L {
     }
 
     @JvmStatic
->>>>>>> v0.0.1
     fun net(msg: String) {
         defaultLogImpl.log(LogLevel.DEBUG, TAG_NET, msg)
     }

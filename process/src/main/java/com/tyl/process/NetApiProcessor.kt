@@ -119,24 +119,8 @@ class NetApiProcessor : AbstractProcessor() {
         val baseViewModelClassName = ClassName("com.tyl.base_lib.base", "BaseViewModel")
         val requestNetApiFunName = ClassName("com.tyl.base_lib.network", "requestNetApi")
         val throwableClassName = ClassName("kotlin", "Throwable")
-<<<<<<< HEAD
-        val liveDataClassName = ClassName("androidx.lifecycle","MutableLiveData")
-        val pageStateEnum=ClassName("com.tyl.base_lib.widget.multistate","PageStatus")
-        val refreshStateEnum=ClassName("com.tyl.base_lib.widget.refresh","RefreshStatus")
-
-        val pageStateParams = ParameterSpec.builder("pageStatus", liveDataClassName.parameterizedBy(pageStateEnum).copy(true))
-            .defaultValue("defaultPageStatus")
-            .build()
-        val refreshStateParams = ParameterSpec.builder("refreshStatus", liveDataClassName.parameterizedBy(refreshStateEnum).copy(true))
-            .defaultValue("defaultRefreshStatus")
-            .build()
-        val isRefreshParams = ParameterSpec.builder("isRefresh", Boolean::class.java)
-            .defaultValue("true")
-            .build()
-=======
         val viewModelScopeFieldName = ClassName("androidx.lifecycle","viewModelScope")
 
->>>>>>> v0.0.1
         val showToastParams = ParameterSpec.builder("showToast", Boolean::class.java)
             .defaultValue("true")
             .build()
@@ -162,31 +146,19 @@ class NetApiProcessor : AbstractProcessor() {
             .receiver(baseViewModelClassName)
             .returns(jobClassName)
             .addParameter(showToastParams)
-            .addParameter(isRefreshParams)
-            .addParameter(refreshStateParams)
-            .addParameter(pageStateParams)
             .addParameter(errorParams)
             .addParameter(finallyParams)
             .addParameter(callParams)
             .addStatement(
-<<<<<<< HEAD
-                "return %T(showToast, isRefresh, refreshStatus, pageStatus, onError, onFinally, { call($fieldName) })",
-=======
                 "return %T.%T(showToast, onError, onFinally, { call($fieldName) })",
                 viewModelScopeFieldName,
->>>>>>> v0.0.1
                 requestNetApiFunName
             )
             .build()
 
         // 生成方法
-<<<<<<< HEAD
-        // Any.leakedApi
-        val doLeakedRequestFunName = ClassName("com.tyl.base_lib.network", "doLeakedRequest")
-=======
         // Any.leakApi
         val doLeakRequestFunName = ClassName("com.tyl.base_lib.network", "doLeakRequest")
->>>>>>> v0.0.1
         val coroutineContextClassName = ClassName("kotlin.coroutines", "CoroutineContext")
         val dispatchersClassName = ClassName("kotlinx.coroutines", "Dispatchers")
         val contextParams = ParameterSpec.builder("context", coroutineContextClassName)

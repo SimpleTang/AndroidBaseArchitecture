@@ -5,10 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.tyl.base_lib.base.BaseApplication
-<<<<<<< HEAD:baseLib/src/main/java/com/tyl/base_lib/extens/ComponentsExt.kt
-=======
 import com.tyl.base_lib.base.application
->>>>>>> v0.0.1:baseLib/src/main/java/com/tyl/base_lib/extens/ComponentsExt.kt
 
 
 fun Activity.toActivity(activityClass: Class<*>, extras: Bundle? = null, requestCode: Int = 1991) {
@@ -19,7 +16,6 @@ fun Activity.toActivity(activityClass: Class<*>, extras: Bundle? = null, request
     startActivityForResult(intent, requestCode)
 }
 
-@Suppress("DEPRECATION")
 fun Fragment.toActivity(activityClass: Class<*>, extras: Bundle? = null, requestCode: Int = 1991) {
     activity?.let {
         val intent = Intent(it, activityClass)

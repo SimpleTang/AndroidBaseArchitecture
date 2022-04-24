@@ -1,6 +1,5 @@
 package com.tyl.base_lib.base
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -90,8 +89,6 @@ abstract class BaseDialogFragment<B : ViewDataBinding> : DialogFragment(), IView
         return binding.root
     }
 
-    @Suppress("DEPRECATION")
-    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         backPressedDispatcher.addCallback(this.viewLifecycleOwner, onBackPressedCallback)

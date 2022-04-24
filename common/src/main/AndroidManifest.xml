@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-    package="com.tyl.common_base">
-    <application>
-        <meta-data android:name="com.tyl.common.config.AppConfig"
-            android:value="ModuleConfig"/>
-=======
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tyl.demo.common">
 
@@ -71,6 +65,5 @@
         <meta-data
             android:name="design_height_in_dp"
             android:value="640"/>
->>>>>>> v0.0.1
     </application>
 </manifest>

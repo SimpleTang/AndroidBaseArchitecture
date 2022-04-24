@@ -70,8 +70,6 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), IView, NoProguard
         return binding.root
     }
 
-    @Deprecated("Deprecated in Java")
-    @Suppress("DEPRECATION")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         backPressedDispatcher.addCallback(this.viewLifecycleOwner, onBackPressedCallback)

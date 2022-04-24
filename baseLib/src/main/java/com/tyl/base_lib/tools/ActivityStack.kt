@@ -3,21 +3,27 @@ package com.tyl.base_lib.tools
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
+/**
+ * 项目内的 Activity 栈，第三方SDK的 Activity 不会被记录
+ */
 object ActivityStack {
-    val activityList: LinkedList<AppCompatActivity> = LinkedList<AppCompatActivity>()
+
+    private val atys: LinkedList<AppCompatActivity> = LinkedList<AppCompatActivity>()
+
+    val activityList: LinkedList<AppCompatActivity>
         get() {
-            return LinkedList(field)
+            return LinkedList(atys)
         }
 
     fun addActivity(activity: AppCompatActivity) {
-        activityList.add(activity)
+        atys.add(activity)
     }
 
     fun removeActivity(a: AppCompatActivity) {
-        activityList.remove(a)
+        atys.remove(a)
     }
 
     fun getTopActivity(): AppCompatActivity? {
-        return activityList.peekLast()
+        return atys.peekLast()
     }
 }
