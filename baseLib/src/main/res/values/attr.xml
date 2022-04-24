@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <declare-styleable name="MultiStateLayout">
         <attr name="state_loadingView" format="reference" />
         <attr name="state_loadErrorView" format="reference" />
         <attr name="state_emptyView" format="reference" />
         <attr name="state_networkErrorView" format="reference" />
         <attr name="state_contentViewId" format="reference" />
+=======
+    <declare-styleable name="MultipleStatusLayout">
+        <attr name="status_initView" format="reference" />
+        <attr name="status_loadingView" format="reference" />
+        <attr name="status_emptyView" format="reference" />
+        <attr name="status_errorView" format="reference" />
+        <attr name="status_contentViewId" format="reference" />
+        <attr name="status_initViewId" format="reference" />
+        <attr name="status_loadingViewId" format="reference" />
+        <attr name="status_emptyViewId" format="reference" />
+        <attr name="status_errorViewId" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ViewGroup">
+        <!--    StatusView    -->
+        <attr name="status_hintViewId" format="reference" />
+        <attr name="status_drawableViewId" format="reference" />
+        <attr name="status_clickableViewId" format="reference" />
+>>>>>>> v0.0.1
     </declare-styleable>
 </resources>

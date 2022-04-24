@@ -9,6 +9,10 @@ object L {
 
     private var enable: Boolean = !BuildConfig.DEBUG
 
+<<<<<<< HEAD
+=======
+    @JvmStatic
+>>>>>>> v0.0.1
     fun enable(enable: Boolean) = apply {
         this.enable = enable
     }
@@ -38,10 +42,15 @@ object L {
         }
     }
 
+<<<<<<< HEAD
+=======
+    @JvmStatic
+>>>>>>> v0.0.1
     fun setLogImpl(iLog: ILog) = apply {
         this.defaultLogImpl = iLog
     }
 
+<<<<<<< HEAD
     fun v(tag: String = TAG_DEFAULT, msg: String) {
         defaultLogImpl.log(LogLevel.VERBOSE, tag, msg)
     }
@@ -62,6 +71,34 @@ object L {
         defaultLogImpl.log(LogLevel.ERROR, tag, msg)
     }
 
+=======
+    @JvmStatic
+    fun v(msg: String, tag: String = TAG_DEFAULT) {
+        defaultLogImpl.log(LogLevel.VERBOSE, tag, msg)
+    }
+
+    @JvmStatic
+    fun d(msg: String, tag: String = TAG_DEFAULT) {
+        defaultLogImpl.log(LogLevel.DEBUG, tag, msg)
+    }
+
+    @JvmStatic
+    fun i(msg: String, tag: String = TAG_DEFAULT) {
+        defaultLogImpl.log(LogLevel.INFO, tag, msg)
+    }
+
+    @JvmStatic
+    fun w(msg: String, tag: String = TAG_DEFAULT) {
+        defaultLogImpl.log(LogLevel.WARN, tag, msg)
+    }
+
+    @JvmStatic
+    fun e(msg: String, tag: String = TAG_DEFAULT) {
+        defaultLogImpl.log(LogLevel.ERROR, tag, msg)
+    }
+
+    @JvmStatic
+>>>>>>> v0.0.1
     fun net(msg: String) {
         defaultLogImpl.log(LogLevel.DEBUG, TAG_NET, msg)
     }

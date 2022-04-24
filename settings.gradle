@@ -1,8 +1,0 @@
-include ':process_annotation'
-include ':process'
-include ':module_main'
-include ':module_core'
-include ':common'
-include ':baseLib'
-include ':app'
-rootProject.name = "BaseProject"

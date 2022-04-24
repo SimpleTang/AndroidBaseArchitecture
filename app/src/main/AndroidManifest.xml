@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.tyl.baseproject">
 
     <application
@@ -11,6 +12,24 @@
         android:name="com.tyl.baseproject.APP"
         android:theme="@style/Theme.BaseProject">
         <activity android:name="com.tyl.baseproject.MainActivity">
+=======
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.tyl.demo.app">
+
+    <application
+        tools:ignore="AllowBackup"
+        android:supportsRtl="false"
+        tools:replace="android:supportsRtl"
+        >
+        <activity
+            android:exported="true"
+            android:name=".MainActivity"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/MSActivityStyle.Splash"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            tools:ignore="LockedOrientationActivity">
+>>>>>>> v0.0.1
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

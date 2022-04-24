@@ -1,39 +1,14 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
-}
+apply plugin: 'com.android.library'
+apply from: "../buildProjectConfig.gradle"
 
 android {
-    compileSdkVersion build_versions.compile_sdk
-    buildToolsVersion build_versions.build_tools
+
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
+
     defaultConfig {
-        targetSdkVersion build_versions.target_sdk
-        minSdkVersion build_versions.min_sdk
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-
-    //支持@Parcelize来实现Parcelable序列化
-    androidExtensions {
-        experimental = true
+        targetSdkVersion 31
+        minSdkVersion 21
     }
     dataBinding {
         enabled = true
@@ -42,4 +17,11 @@ android {
 
 dependencies {
     api project(":baseLib")
+//    api "me.jessyan:autosize:1.2.1"
+    api "com.noober.background:core:1.6.5"
+    api "com.github.xiaohaibin:XBanner:androidx_v1.0.5"
+
+    // 友盟统计SDK
+//    api  "com.umeng.umsdk:common:9.4.0"// 必选
+//    api  "com.umeng.umsdk:asms:1.2.3"// 必选
 }

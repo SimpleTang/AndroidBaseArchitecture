@@ -23,7 +23,7 @@ fun View.onClickNoAnim(duration:Long=500, call: (View)->Unit){
 
 fun View.setTouchAnim(){
     ClickUtils.applyPressedViewScale(this)
-    ClickUtils.applyPressedViewAlpha(this)
+//    ClickUtils.applyPressedViewAlpha(this)
 }
 
 fun View.useStatusBarHeight() = updateLayoutParams {

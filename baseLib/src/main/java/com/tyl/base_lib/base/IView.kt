@@ -11,7 +11,7 @@ interface IView {
 
     fun initData()
 
-    fun showLoading(show: Boolean, msg: String = "请稍后...")
+    fun setLoadingDialog(show: Boolean, msg: String = "请稍后...")
 
     fun attachBaseVMEvent(viewModel: BaseViewModel)
 }

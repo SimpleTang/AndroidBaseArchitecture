@@ -7,8 +7,7 @@ import com.tyl.base_lib.provider.ProviderManager
 
 open class BaseApplication : Application() {
     companion object {
-        lateinit var instance: BaseApplication
-            private set
+        internal var app: BaseApplication? = null
     }
 
     private var mAppDelegate: AppDelegate? = null
@@ -22,10 +21,9 @@ open class BaseApplication : Application() {
         ProviderManager.attachBaseContext(base)
     }
 
-
     override fun onCreate() {
         super.onCreate()
-        instance = this
+        app = this
         mAppDelegate?.onCreate(this)
         ProviderManager.onCreate(this)
     }
@@ -36,3 +34,8 @@ open class BaseApplication : Application() {
         ProviderManager.onTerminate(this)
     }
 }
+
+val application:BaseApplication
+    get() {
+        return BaseApplication.app ?: throw NullPointerException("BaseApplication is not initialize，please use BaseApplication in manifests")
+    }

@@ -1,7 +1,7 @@
 plugins {
-    id 'java-library'
-    id 'kotlin'
-    id 'kotlin-kapt'
+    id "java-library"
+    id "kotlin"
+    id "kotlin-kapt"
 }
 
 java {
@@ -10,11 +10,11 @@ java {
 }
 
 dependencies {
-    implementation deps.kotlin.stdlib
-    implementation deps.kotlin.reflect
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.30"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.30"
     //noinspection AnnotationProcessorOnCompilePath
     implementation "com.google.auto.service:auto-service:1.0-rc7"
-    kapt 'com.google.auto.service:auto-service:1.0-rc7'
-    implementation 'com.squareup:kotlinpoet:1.7.2'
+    kapt "com.google.auto.service:auto-service:1.0-rc7"
+    implementation "com.squareup:kotlinpoet:1.7.2"
     implementation project(":process_annotation")
 }

@@ -1,5 +1,6 @@
 package com.tyl.base_lib.network
 
+<<<<<<< HEAD
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tyl.base_lib.base.*
@@ -19,10 +20,18 @@ fun BaseViewModel.requestNetApi(
     isRefresh: Boolean = true,
     refreshStatus: MutableLiveData<RefreshStatus>? = this.defaultRefreshStatus,
     pageStatus: MutableLiveData<PageStatus>? = this.defaultPageStatus,
+=======
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
+
+fun CoroutineScope.requestNetApi(
+    showToast: Boolean = true,
+>>>>>>> v0.0.1
     error: Throwable.() -> Unit = {},
     finally: () -> Unit = {},
     call: suspend () -> Unit
 ): Job {
+<<<<<<< HEAD
     return viewModelScope.launch {
         //注册前先判断是否显示加载loading
         pageStatus?.value = PageStatus.LOADING
@@ -72,6 +81,41 @@ fun BaseViewModel.requestNetApi(
 
 
 fun Any.doLeakedRequest(
+=======
+    return launch {
+        supervisorScope {
+            launch(CoroutineExceptionHandler { _, throwable ->
+                if (NetManager.netConfig.requestHandler?.onErrorCall(
+                        throwable,
+                        showToast
+                    ) != true
+                ) {
+                    error(throwable)
+                }
+            }) {
+                call()
+            }
+        }
+        finally()
+    }
+}
+
+suspend fun <T> suspendRequestNetApi(showToast: Boolean = true, call: suspend () -> T): T {
+    var exception: Throwable? = null
+    var result: T? = null
+    supervisorScope {
+        launch(CoroutineExceptionHandler { _, throwable ->
+            exception = throwable
+            NetManager.netConfig.requestHandler?.onErrorCall(throwable, showToast)
+        }) {
+            result = call()
+        }
+    }
+    return result ?: throw exception ?: ApiException("未知异常")
+}
+
+fun doLeakRequest(
+>>>>>>> v0.0.1
     context: CoroutineContext = Dispatchers.Main,
     showToast: Boolean = true,
     error: Throwable.() -> Unit = {},

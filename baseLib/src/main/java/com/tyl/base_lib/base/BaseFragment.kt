@@ -70,6 +70,8 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), IView, NoProguard
         return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
+    @Suppress("DEPRECATION")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         backPressedDispatcher.addCallback(this.viewLifecycleOwner, onBackPressedCallback)
@@ -110,16 +112,16 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), IView, NoProguard
                 when (value) {
                     is String -> {
                         if (value.isNotEmpty()) {
-                            view.showLoading(true, value)
+                            view.setLoadingDialog(true, value)
                         } else {
-                            view.showLoading(false)
+                            view.setLoadingDialog(false)
                         }
                     }
                     true -> {
-                        view.showLoading(true)
+                        view.setLoadingDialog(true)
                     }
                     false -> {
-                        view.showLoading(false)
+                        view.setLoadingDialog(false)
                     }
                 }
             }

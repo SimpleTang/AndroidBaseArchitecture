@@ -1,24 +1,20 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'com.tyl.plugin.AutoRegister'
+apply from: "../buildProjectConfig.gradle"
 
 android {
-    compileSdkVersion build_versions.compile_sdk
-    buildToolsVersion build_versions.build_tools
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
+
     defaultConfig {
-        applicationId "com.nacai.baseproject"
-        targetSdkVersion build_versions.target_sdk
-        minSdkVersion build_versions.min_sdk
+        targetSdkVersion 31
+        minSdkVersion 21
+        applicationId "com.tyl.demo"
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
+<<<<<<< HEAD
     buildTypes {
         release {
             minifyEnabled false
@@ -35,10 +31,13 @@ android {
     dataBinding {
         enabled = true
     }
+=======
+>>>>>>> v0.0.1
 }
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api project(':module_core')
-    api project(':module_main')
+    api project(":module_main")
+    api project(":module_storage")
+    kapt project(":process")
 }

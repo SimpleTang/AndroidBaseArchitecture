@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
+=======
+    <string name="AppName">demo</string>
+
+>>>>>>> v0.0.1
     <string name="common_net_server_error">服务端响应异常</string>
     <string name="common_net_time_out">网络连接超时</string>
     <string name="common_net_disconnect">服务器开小差了</string>
     <string name="common_net_data_error">数据解析错误</string>
+<<<<<<< HEAD
+=======
+
+    <string name="common_agree">同意</string>
+    <string name="common_approved">已同意</string>
+    <string name="common_disagree">不同意</string>
+    <string name="common_save">保存</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_confirm">确定</string>
+    <string name="common_iKnow">我知道了</string>
+>>>>>>> v0.0.1
 </resources>

@@ -5,6 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.tyl.base_lib.base.BaseApplication
+<<<<<<< HEAD:baseLib/src/main/java/com/tyl/base_lib/extens/ComponentsExt.kt
+=======
+import com.tyl.base_lib.base.application
+>>>>>>> v0.0.1:baseLib/src/main/java/com/tyl/base_lib/extens/ComponentsExt.kt
 
 
 fun Activity.toActivity(activityClass: Class<*>, extras: Bundle? = null, requestCode: Int = 1991) {
@@ -15,6 +19,7 @@ fun Activity.toActivity(activityClass: Class<*>, extras: Bundle? = null, request
     startActivityForResult(intent, requestCode)
 }
 
+@Suppress("DEPRECATION")
 fun Fragment.toActivity(activityClass: Class<*>, extras: Bundle? = null, requestCode: Int = 1991) {
     activity?.let {
         val intent = Intent(it, activityClass)
@@ -28,28 +33,28 @@ fun Fragment.toActivity(activityClass: Class<*>, extras: Bundle? = null, request
 val Float.dp: Int
     get() {
 //        return ConvertUtils.dp2px(this)
-        val scale = BaseApplication.instance.resources.displayMetrics.density
+        val scale = application.resources.displayMetrics.density
         return (this * scale + 0.5f).toInt()
     }
 
 val Int.dp: Int
     get() {
 //        return ConvertUtils.dp2px(toFloat())
-        val scale = BaseApplication.instance.resources.displayMetrics.density
+        val scale = application.resources.displayMetrics.density
         return (this * scale + 0.5f).toInt()
     }
 
 val Float.sp: Int
     get() {
 //        return ConvertUtils.sp2px(this)
-        val fontScale = BaseApplication.instance.resources.displayMetrics.scaledDensity
+        val fontScale = application.resources.displayMetrics.scaledDensity
         return (this * fontScale + 0.5f).toInt()
     }
 
 val Int.sp: Int
     get() {
 //        return ConvertUtils.sp2px(toFloat())
-        val fontScale = BaseApplication.instance.resources.displayMetrics.scaledDensity
+        val fontScale = application.resources.displayMetrics.scaledDensity
         return (this * fontScale + 0.5f).toInt()
     }
 

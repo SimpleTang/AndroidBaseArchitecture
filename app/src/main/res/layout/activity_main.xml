@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+<<<<<<< HEAD
         <variable
             name="aty"
             type="com.tyl.baseproject.MainActivity" />
@@ -42,4 +43,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+
+    </data>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcvContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".app.MainActivity">
+
+    </androidx.fragment.app.FragmentContainerView>
+>>>>>>> v0.0.1
 </layout>

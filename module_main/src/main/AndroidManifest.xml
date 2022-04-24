@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tyl.module_main">
-    <application>
-        <meta-data android:name="com.tyl.module_core.AppConfig"
-            android:value="ModuleConfig"/>
-        <meta-data android:name="com.tyl.module_core.CoreProviderImpl"
-            android:value="ModuleProvider"/>
-    </application>
+    package="com.tyl.demo.module_main">
+
 </manifest>

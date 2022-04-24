@@ -27,6 +27,8 @@ class NetApiProcessor : AbstractProcessor() {
 
     private lateinit var mElementUtils: Elements
 
+    private lateinit var logger: Logger
+
     // gradle传进来的模块名
     private var mModuleName: String? = null
 
@@ -40,7 +42,9 @@ class NetApiProcessor : AbstractProcessor() {
 
         mModuleName = processingEnv.options["ModuleName"]
 
-        println("NetApiProcessor 初始化完成.....${mModuleName}")
+        logger = Logger(mModuleName ?: "unknown", "NetApiProcessor")
+
+        logger.i("NetApiProcessor 初始化完成...")
     }
 
     override fun process(
@@ -50,7 +54,7 @@ class NetApiProcessor : AbstractProcessor() {
 
         //------------ 1.查找@NetApi注解下的所有类 ---------------------------
         if (annotations.isNullOrEmpty() || roundEnv == null) {
-            println("未找到 @NetApi")
+//            logger.i("未找到 @NetApi")
             return false
         }
         // 获取所有的被注解的节点
@@ -58,26 +62,26 @@ class NetApiProcessor : AbstractProcessor() {
 
         when {
             elements.size > 1 -> {
-                println("发现了多个@NetApi：")
+                logger.e("发现了多个@NetApi：")
 
                 elements.forEach {
-                    println("$it")
+                    logger.e("$it")
                 }
                 throw IllegalArgumentException("发现了多个网络接口类")
 
             }
             elements.size < 1 -> {
-                println("未找到 @NetApi")
+//                logger.i("未找到 @NetApi")
                 return false
             }
             else -> {
-                println("发现 @NetApi：${elements.first()}")
+                logger.i("@NetApi ${elements.first()}")
             }
         }
         val element = elements.first()
 
         if (!element.kind.isInterface) {
-            println("@NetApi 只能使用在接口上，${elements.first()} 不是一个接口")
+            logger.e("@NetApi 只能使用在接口上，${elements.first()} 不是一个接口")
             throw IllegalArgumentException("@NetApi 只能使用在接口上")
         }
 
@@ -115,6 +119,7 @@ class NetApiProcessor : AbstractProcessor() {
         val baseViewModelClassName = ClassName("com.tyl.base_lib.base", "BaseViewModel")
         val requestNetApiFunName = ClassName("com.tyl.base_lib.network", "requestNetApi")
         val throwableClassName = ClassName("kotlin", "Throwable")
+<<<<<<< HEAD
         val liveDataClassName = ClassName("androidx.lifecycle","MutableLiveData")
         val pageStateEnum=ClassName("com.tyl.base_lib.widget.multistate","PageStatus")
         val refreshStateEnum=ClassName("com.tyl.base_lib.widget.refresh","RefreshStatus")
@@ -128,6 +133,10 @@ class NetApiProcessor : AbstractProcessor() {
         val isRefreshParams = ParameterSpec.builder("isRefresh", Boolean::class.java)
             .defaultValue("true")
             .build()
+=======
+        val viewModelScopeFieldName = ClassName("androidx.lifecycle","viewModelScope")
+
+>>>>>>> v0.0.1
         val showToastParams = ParameterSpec.builder("showToast", Boolean::class.java)
             .defaultValue("true")
             .build()
@@ -160,22 +169,30 @@ class NetApiProcessor : AbstractProcessor() {
             .addParameter(finallyParams)
             .addParameter(callParams)
             .addStatement(
+<<<<<<< HEAD
                 "return %T(showToast, isRefresh, refreshStatus, pageStatus, onError, onFinally, { call($fieldName) })",
+=======
+                "return %T.%T(showToast, onError, onFinally, { call($fieldName) })",
+                viewModelScopeFieldName,
+>>>>>>> v0.0.1
                 requestNetApiFunName
             )
             .build()
 
         // 生成方法
+<<<<<<< HEAD
         // Any.leakedApi
         val doLeakedRequestFunName = ClassName("com.tyl.base_lib.network", "doLeakedRequest")
+=======
+        // Any.leakApi
+        val doLeakRequestFunName = ClassName("com.tyl.base_lib.network", "doLeakRequest")
+>>>>>>> v0.0.1
         val coroutineContextClassName = ClassName("kotlin.coroutines", "CoroutineContext")
         val dispatchersClassName = ClassName("kotlinx.coroutines", "Dispatchers")
-        val anyClassName = ClassName("kotlin", "Any")
         val contextParams = ParameterSpec.builder("context", coroutineContextClassName)
             .defaultValue("%T.Main", dispatchersClassName)
             .build()
-        val anyApiFun = FunSpec.builder("leakedApi")
-            .receiver(anyClassName)
+        val anyApiFun = FunSpec.builder("leakApi")
             .returns(jobClassName)
             .addParameter(contextParams)
             .addParameter(showToastParams)
@@ -184,16 +201,41 @@ class NetApiProcessor : AbstractProcessor() {
             .addParameter(callParams)
             .addStatement(
                 "return %T(context, showToast, onError, onFinally, { call($fieldName) })",
-                doLeakedRequestFunName
+                doLeakRequestFunName
             )
             .build()
+
+        // 生成方法
+        // suspendApi
+        val suspendRequestNetApiFunName = ClassName("com.tyl.base_lib.network", "suspendRequestNetApi")
+        val callTypeVariableParams = ParameterSpec.builder(
+            "call",
+            LambdaTypeName.get(apiClassName, returnType = TypeVariableName.invoke("T"))
+                .copy(suspending = true)
+        )
+            .build()
+        val suspendApiFun = FunSpec.builder("suspendApi")
+            .addModifiers(KModifier.SUSPEND)
+            .addTypeVariable(TypeVariableName.invoke("T"))
+            .returns(TypeVariableName.invoke("T"))
+            .addParameter(showToastParams)
+            .addParameter(callTypeVariableParams)
+            .addStatement(
+                "return %T(showToast, { call($fieldName) })",
+                suspendRequestNetApiFunName
+            )
+            .build()
+
 
         // 生成文件
         val file = FileSpec.builder(packageName, "NetApi_Impl")
             .addProperty(apiServerField)
             .addFunction(vmApiFun)
             .addFunction(anyApiFun)
+            .addFunction(suspendApiFun)
             .build()
+
+        logger.i("${packageName}.NetApi_Impl 生成成功")
 
         file.writeTo(mFiler)
         return true

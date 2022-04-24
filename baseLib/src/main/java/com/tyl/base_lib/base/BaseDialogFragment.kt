@@ -1,5 +1,6 @@
 package com.tyl.base_lib.base
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -14,6 +15,12 @@ import com.tyl.base_lib.R
 import com.tyl.base_lib.tools.NoProguardClass
 
 abstract class BaseDialogFragment<B : ViewDataBinding> : DialogFragment(), IView, NoProguardClass {
+
+    companion object {
+        const val RESIZE_WIDTH = 0
+        const val RESIZE_HEIGHT = 1
+        const val RESIZE_GRAVITY = 2
+    }
 
     protected lateinit var binding: B
         private set
@@ -83,6 +90,8 @@ abstract class BaseDialogFragment<B : ViewDataBinding> : DialogFragment(), IView
         return binding.root
     }
 
+    @Suppress("DEPRECATION")
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         backPressedDispatcher.addCallback(this.viewLifecycleOwner, onBackPressedCallback)
@@ -96,16 +105,16 @@ abstract class BaseDialogFragment<B : ViewDataBinding> : DialogFragment(), IView
                 when (value) {
                     is String -> {
                         if (value.isNotEmpty()) {
-                            view.showLoading(true, value)
+                            view.setLoadingDialog(true, value)
                         } else {
-                            view.showLoading(false)
+                            view.setLoadingDialog(false)
                         }
                     }
                     true -> {
-                        view.showLoading(true)
+                        view.setLoadingDialog(true)
                     }
                     false -> {
-                        view.showLoading(false)
+                        view.setLoadingDialog(false)
                     }
                 }
             }
@@ -114,7 +123,7 @@ abstract class BaseDialogFragment<B : ViewDataBinding> : DialogFragment(), IView
         })
     }
 
-    override fun showLoading(show: Boolean, msg: String) {
-        (activity as? BaseActivity<*>)?.showLoading(show, msg)
+    override fun setLoadingDialog(show: Boolean, msg: String) {
+        (activity as? BaseActivity<*>)?.setLoadingDialog(show, msg)
     }
 }
