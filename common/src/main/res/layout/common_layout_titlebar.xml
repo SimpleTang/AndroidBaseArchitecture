@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="info"
+            type="com.tyl.ledger.common.ui.widget.TitleBarInfo" />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/title_rl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/common_statusBarColor" >
+
+        <Button
+            android:id="@+id/header_button_left"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:background="@color/transparent"
+            android:gravity="start|center_vertical"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:drawableStart="@drawable/common_title_bar_back_icon"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="@color/common_defaultTextColor"
+            android:textSize="17sp"
+            android:text="@{info.title}"
+            tools:text="标题"
+            />
+
+        <Button
+            android:id="@+id/header_button_right"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:gravity="end|center_vertical"
+            android:paddingEnd="15dp"
+            android:background="@android:color/transparent"
+            android:text="@{info.rightButtonText}"
+            tools:text="更多"
+            android:textColor="@{info.rightButtonColor}"
+            android:textSize="15sp"
+            android:visibility="@{info.showRightButton ? View.VISIBLE : View.GONE}"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageView
+            android:id="@+id/header_button_right_img"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" />
+        <View
+            android:id="@+id/v_header"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/common_title_bar_dividing_line_bg" />
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorAccent">#7392FF</color>
+
+    <color name="common_defaultTextColor">#333333</color>
+    <color name="common_subTextColor">#9296A0</color>
+    <color name="common_weakTextColor">#D1CFE1</color>
+    <color name="common_hintTextColor">#9AA1BC</color>
+
+    <color name="common_defaultBgColor">#FFFFFF</color>
+    <color name="common_statusBarColor">#FFFFFF</color>
+    <color name="common_navigationBarColor">#FFFFFF</color>
+</resources>

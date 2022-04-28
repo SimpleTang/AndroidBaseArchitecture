@@ -1,0 +1,13 @@
+rootProject.name = "BaseProject"
+includeBuild("plugin_autoRegister")
+include(":process_annotation")
+include(":process")
+include(":baseLib")
+//include(":app")
+//include(":common")
+//include(":module_core")
+//include(":module_main")
+include(":common")
+include(":module_storage")
+include(":module_main")
+include(":app")

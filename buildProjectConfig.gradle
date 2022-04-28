@@ -1,0 +1,93 @@
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
+apply plugin: "kotlin-parcelize"
+
+android {
+    defaultConfig {
+        multiDexEnabled true
+        flavorDimensions "versionCode"
+        ndk { //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi-v7a"
+        }
+    }
+
+    signingConfigs {
+        File file = new File(getRootDir().getAbsolutePath() + "/sign.jks")
+        debug {
+            keyAlias "keyCommon"
+            keyPassword "tyl121"
+            storeFile file
+            storePassword "tyl121"
+        }
+        release {
+            keyAlias "keyCommon"
+            keyPassword "tyl121"
+            storeFile file
+            storePassword "tyl121"
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "String", "SERVER_HOST", "\"https://www.baidu.com/\""
+            buildConfigField "String", "H5_HOST", "\"http://www.baidu.com/\""
+            buildConfigField "String", "RES_HOST", "\"https://www.baidu.com/\""
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled true
+            manifestPlaceholders.put("rong_key", "111")
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.debug
+        }
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "String", "SERVER_HOST", "\"https://www.baidu.com/\""
+            buildConfigField "String", "H5_HOST", "\"http://www.baidu.com/\""
+            buildConfigField "String", "RES_HOST", "\"https://www.baidu.com/\""
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled true
+            manifestPlaceholders.put("rong_key", "111")
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
+        }
+        apptest {
+            initWith(debug)
+        }
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+
+    }
+
+    //----------------------------------
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    //不进行代码静态检测
+    lintOptions {
+        abortOnError false
+    }
+
+    //支持java8
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //开启databinding
+    dataBinding {
+        enabled = true
+    }
+
+    //生成libs目录
+    sourceSets {
+        main.jniLibs.srcDirs = ["libs"]
+    }
+
+}

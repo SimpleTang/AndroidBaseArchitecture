@@ -1,0 +1,26 @@
+apply plugin: "com.android.library"
+apply from: "../buildProjectConfig.gradle"
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        targetSdkVersion 30
+        minSdkVersion 21
+        versionCode 1
+        versionName "0.0.1"
+    }
+
+    kapt {
+        arguments {
+            arg("ModuleName", project.getName())
+        }
+    }
+
+}
+
+dependencies {
+    api project(":common")
+    kapt project(":process")
+}
