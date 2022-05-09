@@ -36,13 +36,13 @@ kotlinDslPluginOptions {
     experimentalWarning.set(false)
 }
 
-group = "com.tyl.plugin"
+group = "com.tyl.aba"
 version = "1.0.0"
 
 gradlePlugin {
     plugins {
-        create("AutoRegister") {
-            id = "com.tyl.plugin.AutoRegister"// plugins id
+        create("register") {
+            id = "com.tyl.aba.plugin.register"// plugins id
             implementationClass = "com.tyl.plugin.autoregister.AutoRegisterPlugin"
         }
     }
@@ -51,7 +51,17 @@ gradlePlugin {
 publishing {
     repositories {
         maven {
-            url = uri("../repo")
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/simpletang/AndroidBaseArchitecture")
+            credentials {
+                username = project.findProperty("gpr.user") as String?
+                password = project.findProperty("gpr.key") as String?
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
         }
     }
 }

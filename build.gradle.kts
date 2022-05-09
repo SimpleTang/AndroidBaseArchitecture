@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:7.1.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21")
-        classpath("com.tyl.plugin:plugin_autoRegister:1.0.0")
+        classpath("com.tyl.aba:plugin_register:1.0.0")
     }
 
     repositories {

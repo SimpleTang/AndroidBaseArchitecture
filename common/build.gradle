@@ -16,8 +16,7 @@ android {
 }
 
 dependencies {
-    api project(":baseLib")
-//    api "me.jessyan:autosize:1.2.1"
+    api project(':base_lib')//    api "me.jessyan:autosize:1.2.1"
     api "com.noober.background:core:1.6.5"
     api "com.github.xiaohaibin:XBanner:androidx_v1.0.5"
 

@@ -107,7 +107,7 @@ fun PagingDataAdapter<*, *>.bindViews(refreshLayout: SmartRefreshLayout, stateVi
     }
 }
 
-fun <T> diffItems(vararg contrast: (T) -> Any) =
+fun <T : Any> diffItems(vararg contrast: (T) -> Any) =
     object : DiffUtil.ItemCallback<T>() {
         override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
             val first = contrast.getOrNull(0)

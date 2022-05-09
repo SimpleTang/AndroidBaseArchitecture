@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.tyl.plugin.AutoRegister'
+apply plugin: 'com.tyl.aba.plugin.register'
 apply from: "../buildProjectConfig.gradle"
 
 android {

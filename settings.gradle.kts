@@ -1,8 +1,8 @@
 rootProject.name = "BaseProject"
-includeBuild("plugin_autoRegister")
+includeBuild("plugin_register")
 include(":process_annotation")
 include(":process")
-include(":baseLib")
+include(":base_lib")
 //include(":app")
 //include(":common")
 //include(":module_core")
